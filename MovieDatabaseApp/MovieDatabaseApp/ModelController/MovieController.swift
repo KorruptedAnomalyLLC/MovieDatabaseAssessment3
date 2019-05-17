@@ -17,13 +17,22 @@ class MovieController {
     //    Search by ID or Character's name
     func fetchMovie(searchTerm: String, completion: @escaping (Movie?) ->Void) {
         
+        if let url = URL(string: "https://api.themoviedb.org/3/movie/") {
+            var request = URLRequest(url: url)
+            request.addValue("621c011ff27583f12f2c0f2fce7cd6d8", forHTTPHeaderField: "API Key")
+                request.httpMethod = "GET"
+            let dataTask = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+                //handle response here
+            }
+            dataTask.resume()
+        }
         //        build the URL
-        guard let baseURL = URL(string: "https://api.themoviedb.org/3/movie/") else { return }
+       /*( guard let baseURL = URL(string: "https://api.themoviedb.org/3/movie/") else { return }
         //        Add componenets and query items
         let movieComnponenetURL = baseURL.appendingPathComponent("")
         let finalURL = movieComnponenetURL.appendingPathComponent(searchTerm)
         
-        print(finalURL)
+         print(finalURL)
         
         URLSession.shared.dataTask(with: finalURL) { (data, _, error) in
             //            check for error
@@ -44,7 +53,8 @@ class MovieController {
                 }
             }
         }.resume()
-    }
+ */   }
+ 
     
 //    image retrieval goes here
     
